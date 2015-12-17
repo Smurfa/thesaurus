@@ -10,9 +10,9 @@ namespace Thesaurus
     {
         static void Main(string[] args)
         {
-            Thesaurus thesaurus = new Thesaurus();
-            bool cont = true;
-            while(cont)
+            Thesaurus _thesaurus = new Thesaurus();
+            bool _cont = true;
+            while(_cont)
             {
                 Console.WriteLine("1: Add synonyms");
                 Console.WriteLine("2: Get synonyms");
@@ -25,42 +25,42 @@ namespace Thesaurus
                 {
                     case ConsoleKey.D1:
                         {
-                            AddSynonyms(thesaurus);
+                            AddSynonyms(_thesaurus);
                             break;
                         }
                     case ConsoleKey.NumPad1:
                         {
-                            AddSynonyms(thesaurus);
+                            AddSynonyms(_thesaurus);
                             break;
                         }
                     case ConsoleKey.D2:
                         {
-                            GetSynonyms(thesaurus);
+                            GetSynonyms(_thesaurus);
                             break;
                         }
                     case ConsoleKey.NumPad2:
                         {
-                            GetSynonyms(thesaurus);
+                            GetSynonyms(_thesaurus);
                             break;
                         }
                     case ConsoleKey.D3:
                         {
+                            GetWords(_thesaurus);
                             break;
                         }
                     case ConsoleKey.NumPad3:
                         {
-                            GetSynonyms(thesaurus);
+                            GetWords(_thesaurus);
                             break;
                         }
                     case ConsoleKey.D0:
                         {
-                            GetSynonyms(thesaurus);
-                            cont = false;
+                            _cont = false;
                             break;
                         }
                     case ConsoleKey.NumPad0:
                         {
-                            cont = false;
+                            _cont = false;
                             break;
                         }
                     default:
