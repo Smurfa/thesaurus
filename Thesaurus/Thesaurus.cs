@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Thesaurus
 {
-    public class Thesaurus 
+    public class Thesaurus : IThesaurus
     {
         //Dictionary<string, List<string>> _words = new Dictionary<string, List<string>>();
-        List<List<string>> _words = new List<List<string>>();
+        List<List<string>> _wordList = new List<List<string>>();
 
         public void AddSynonyms(IEnumerable<string> synonyms)
         {
@@ -24,7 +24,7 @@ namespace Thesaurus
 
         public IEnumerable<string> GetWords()
         {
-            return _words.SelectMany(words => words.ToList());
+            return _wordList.SelectMany(x => x.ToList());
         }
     }
 }

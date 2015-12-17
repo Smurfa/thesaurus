@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Thesaurus
 {
@@ -10,9 +7,10 @@ namespace Thesaurus
     {
         static void Main(string[] args)
         {
-            Thesaurus _thesaurus = new Thesaurus();
+            IThesaurus _thesaurus = new Thesaurus();
             bool _cont = true;
-            while(_cont)
+
+            while (_cont)
             {
                 Console.WriteLine("1: Add synonyms");
                 Console.WriteLine("2: Get synonyms");
@@ -72,7 +70,7 @@ namespace Thesaurus
             }
         }
 
-        static void AddSynonyms(Thesaurus _thesaurus)
+        static void AddSynonyms(IThesaurus _thesaurus)
         {
             //bool cont = true;
 
@@ -89,7 +87,7 @@ namespace Thesaurus
             _thesaurus.AddSynonyms(temp);
         }
 
-        static void GetSynonyms(Thesaurus _thesaurus)
+        static void GetSynonyms(IThesaurus _thesaurus)
         {
             Console.Write("Enter word to find synonyms for: ");
             string word = Console.ReadLine();
@@ -100,14 +98,14 @@ namespace Thesaurus
                     Console.WriteLine(synonym);
                 }
             }
-            catch (NullReferenceException e)
+            catch (Exception e)
             {
                 Console.WriteLine("Exception occured: " + e.ToString() + "\nWord probably did not exist.");
             }
             
         }
 
-        static void GetWords(Thesaurus _thesaurus)
+        static void GetWords(IThesaurus _thesaurus)
         {
             foreach (string word in _thesaurus.GetWords())
             {
