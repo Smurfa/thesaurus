@@ -18,8 +18,14 @@ namespace Thesaurus
 
         public IEnumerable<string> GetSynonyms(string word)
         {
-            //TODO: Filter so that the word searched for isn't returned as well.
-            return _words.FirstOrDefault(x => x.Contains(word));
+            //TODO: Why am I not allowed to write it on single line? Exludes first element but not the others in a list.
+            //return _wordList.FirstOrDefault(x => x.Contains(word)).Where((y, i) => i != y.IndexOf(word));
+
+            // Works as well
+            //return _wordList.FirstOrDefault(x => x.Contains(word)).Except(new[] { word });
+
+            var synonyms = _wordList.FirstOrDefault(x => x.Contains(word));
+            return synonyms.Where((y, i) => i != y.IndexOf(word));
         }
 
         public IEnumerable<string> GetWords()
