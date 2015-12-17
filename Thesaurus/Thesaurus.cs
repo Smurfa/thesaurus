@@ -18,20 +18,13 @@ namespace Thesaurus
 
         public IEnumerable<string> GetSynonyms(string word)
         {
-
-            
-            List<string> temp = new List<string>();
-            temp.Add("test");
-            temp.Add("test2");
-            temp.Add("test3");
-            temp.Add("test4");
-
-            return temp;
+            //TODO: Filter so that the word searched for isn't returned as well.
+            return _words.FirstOrDefault(x => x.Contains(word));
         }
 
         public IEnumerable<string> GetWords()
         {
-            throw new Exception("Not yet implemented");
+            return _words.SelectMany(words => words.ToList());
         }
     }
 }

@@ -93,11 +93,18 @@ namespace Thesaurus
         {
             Console.Write("Enter word to find synonyms for: ");
             string word = Console.ReadLine();
-
-            foreach (string synonym in _thesaurus.GetSynonyms(word))
+            try
             {
-                Console.WriteLine(synonym);
+                foreach (string synonym in _thesaurus.GetSynonyms(word))
+                {
+                    Console.WriteLine(synonym);
+                }
             }
+            catch (NullReferenceException e)
+            {
+                Console.WriteLine("Exception occured: " + e.ToString() + "\nWord probably did not exist.");
+            }
+            
         }
 
         static void GetWords(Thesaurus _thesaurus)
