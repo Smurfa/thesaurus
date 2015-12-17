@@ -74,15 +74,19 @@ namespace Thesaurus
 
         static void AddSynonyms(Thesaurus _thesaurus)
         {
-            bool cont = true;
+            //bool cont = true;
 
-            Console.Write("Enter word: ");
-            string word = Console.ReadLine();
-            Console.WriteLine("Add synonyms, press ESCAPE to complete.");
+            //Console.Write("Enter word: ");
+            //string word = Console.ReadLine();
+            //Console.WriteLine("Add synonyms, press ESCAPE to complete.");
 
-            List<string> synonyms = new List<string>();
+            //List<string> synonyms = new List<string>();
+            List<string> temp = new List<string>();
+            temp.Add("test");
+            temp.Add("test1");
+            temp.Add("test2");
 
-            //_thesaurus.AddSynonyms(synonyms)
+            _thesaurus.AddSynonyms(temp);
         }
 
         static void GetSynonyms(Thesaurus _thesaurus)
@@ -90,7 +94,7 @@ namespace Thesaurus
             Console.Write("Enter word to find synonyms for: ");
             string word = Console.ReadLine();
 
-            foreach(string synonym in _thesaurus.GetSynonyms(word))
+            foreach (string synonym in _thesaurus.GetSynonyms(word))
             {
                 Console.WriteLine(synonym);
             }
