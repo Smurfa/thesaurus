@@ -8,29 +8,33 @@ namespace Thesaurus
 {
     public class Thesaurus : IThesaurus
     {
-        //Dictionary<string, List<string>> _words = new Dictionary<string, List<string>>();
         List<List<string>> _wordList = new List<List<string>>();
 
         public void AddSynonyms(IEnumerable<string> synonyms)
         {
-            _words.Add(synonyms.ToList());
+            //Check if any of the words being added already is in the thesaurus
+            if (!_wordList.Any(x => x.Intersect(synonyms).Any()))
+            {
+                //If not, then safely add the entire list as a new entry
+                _wordList.Add(synonyms.ToList());
+            }
+            else
+            {
+
+            }
+            
+            //TODO: Check if words already exist
         }
 
         public IEnumerable<string> GetSynonyms(string word)
         {
-            //TODO: Why am I not allowed to write it on single line? Exludes first element but not the others in a list.
-            //return _wordList.FirstOrDefault(x => x.Contains(word)).Where((y, i) => i != y.IndexOf(word));
-
-            // Works as well
-            //return _wordList.FirstOrDefault(x => x.Contains(word)).Except(new[] { word });
-
-            var synonyms = _wordList.FirstOrDefault(x => x.Contains(word));
-            return synonyms.Where((y, i) => i != y.IndexOf(word));
+            //Find the list containing the word, then exclude the word that was used to search on since it looks strange that a word is a synonym to itself
+            return _wordList.FirstOrDefault(x => x.Contains(word)).Except(new[] { word });
         }
 
         public IEnumerable<string> GetWords()
         {
-            return _wordList.SelectMany(x => x.ToList());
+            return _wordList.SelectMany(x => x);
         }
     }
 }
