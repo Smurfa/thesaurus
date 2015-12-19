@@ -8,92 +8,36 @@ namespace Thesaurus
         static void Main(string[] args)
         {
             IThesaurus _thesaurus = new Thesaurus();
-            bool _cont = true;
 
-            while (_cont)
-            {
-                Console.WriteLine("1: Add synonyms");
-                Console.WriteLine("2: Get synonyms");
-                Console.WriteLine("3: Get words");
-                Console.WriteLine("0: Exit");
-                ConsoleKey choice = Console.ReadKey().Key;
-                Console.WriteLine();
+            List<string> _words = new List<string> { "test1", "test2", "test3" };
+            AddSynonyms(_thesaurus, _words);
+            _words = new List<string> { "temp1", "temp2", "temp3", "temp4" };
+            AddSynonyms(_thesaurus, _words);
+            _words = new List<string> { "word1", "word2" };
+            AddSynonyms(_thesaurus, _words);
 
-                switch(choice)
-                {
-                    case ConsoleKey.D1:
-                        {
-                            AddSynonyms(_thesaurus);
-                            break;
-                        }
-                    case ConsoleKey.NumPad1:
-                        {
-                            AddSynonyms(_thesaurus);
-                            break;
-                        }
-                    case ConsoleKey.D2:
-                        {
-                            GetSynonyms(_thesaurus);
-                            break;
-                        }
-                    case ConsoleKey.NumPad2:
-                        {
-                            GetSynonyms(_thesaurus);
-                            break;
-                        }
-                    case ConsoleKey.D3:
-                        {
-                            GetWords(_thesaurus);
-                            break;
-                        }
-                    case ConsoleKey.NumPad3:
-                        {
-                            GetWords(_thesaurus);
-                            break;
-                        }
-                    case ConsoleKey.D0:
-                        {
-                            _cont = false;
-                            break;
-                        }
-                    case ConsoleKey.NumPad0:
-                        {
-                            _cont = false;
-                            break;
-                        }
-                    default:
-                        {
-                            Console.WriteLine("Unknown command");
-                            break;
-                        }
-                }
-            }
+            GetWords(_thesaurus);
+            Console.WriteLine();
+            GetSynonyms(_thesaurus, "temp2");
+            Console.WriteLine();
+
+            _words = new List<string> { "test2", "test4", "test5" };
+            AddSynonyms(_thesaurus, _words);
+            GetSynonyms(_thesaurus, "test2");
+
+            Console.ReadLine();
         }
 
-        static void AddSynonyms(IThesaurus _thesaurus)
+        static void AddSynonyms(IThesaurus thesaurus, IEnumerable<string> words)
         {
-            //bool cont = true;
-
-            //Console.Write("Enter word: ");
-            //string word = Console.ReadLine();
-            //Console.WriteLine("Add synonyms, press ESCAPE to complete.");
-
-            //List<string> synonyms = new List<string>();
-            List<string> temp = new List<string>();
-            temp.Add("test");
-            temp.Add("test1");
-            temp.Add("test2");
-
-            _thesaurus.AddSynonyms(temp);
+            thesaurus.AddSynonyms(words);
         }
 
-        static void GetSynonyms(IThesaurus _thesaurus)
+        static void GetSynonyms(IThesaurus thesaurus, string word)
         {
-            Console.Write("Enter word to find synonyms for: ");
-            string word = Console.ReadLine();
             try
             {
-                foreach (string synonym in _thesaurus.GetSynonyms(word))
+                foreach (string synonym in thesaurus.GetSynonyms(word))
                 {
                     Console.WriteLine(synonym);
                 }
@@ -105,9 +49,9 @@ namespace Thesaurus
             
         }
 
-        static void GetWords(IThesaurus _thesaurus)
+        static void GetWords(IThesaurus thesaurus)
         {
-            foreach (string word in _thesaurus.GetWords())
+            foreach (string word in thesaurus.GetWords())
             {
                 Console.WriteLine(word);
             }

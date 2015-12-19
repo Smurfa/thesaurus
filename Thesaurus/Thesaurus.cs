@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Thesaurus
 {
@@ -13,17 +10,17 @@ namespace Thesaurus
         public void AddSynonyms(IEnumerable<string> synonyms)
         {
             //Check if any of the words being added already is in the thesaurus
-            if (!_wordList.Any(x => x.Intersect(synonyms).Any()))
+            if (_wordList.Any(x => x.Intersect(synonyms).Any()))
+            {
+                int index = _wordList.FindIndex(x => x.Intersect(synonyms).Any());
+                _wordList.Insert(index, _wordList.ElementAt(index).Union(synonyms).ToList());
+                _wordList.RemoveAt(index + 1);
+            }
+            else
             {
                 //If not, then safely add the entire list as a new entry
                 _wordList.Add(synonyms.ToList());
             }
-            else
-            {
-
-            }
-            
-            //TODO: Check if words already exist
         }
 
         public IEnumerable<string> GetSynonyms(string word)
