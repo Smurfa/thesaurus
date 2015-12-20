@@ -9,21 +9,29 @@ namespace Thesaurus
         {
             IThesaurus _thesaurus = new Thesaurus();
 
-            List<string> _words = new List<string> { "test1", "test2", "test3" };
+            List<string> _words = new List<string> { "play", "performance", "show" };
             AddSynonyms(_thesaurus, _words);
-            _words = new List<string> { "temp1", "temp2", "temp3", "temp4" };
+            _words = new List<string> { "show", "drama", "play", "performance" };
             AddSynonyms(_thesaurus, _words);
-            _words = new List<string> { "word1", "word2" };
+            _words = new List<string> { "consume", "eat" };
+            AddSynonyms(_thesaurus, _words);
+            _words = new List<string> { "fun", "play", "sport" };
             AddSynonyms(_thesaurus, _words);
 
+            Console.WriteLine("--ALL WORDS--");
             GetWords(_thesaurus);
-            Console.WriteLine();
-            GetSynonyms(_thesaurus, "temp2");
-            Console.WriteLine();
 
-            _words = new List<string> { "test2", "test4", "test5" };
+            Console.WriteLine("\n--SYNONYMS TO: play--");
+            GetSynonyms(_thesaurus, "play");
+
+            _words = new List<string> { "performance", "work", "achievment" };
             AddSynonyms(_thesaurus, _words);
-            GetSynonyms(_thesaurus, "test2");
+
+            Console.WriteLine("\n--SYNONYMS TO: performance--");
+            GetSynonyms(_thesaurus, "performance");
+
+            Console.WriteLine("\n--ALL WORDS--");
+            GetWords(_thesaurus);
 
             Console.ReadLine();
         }
