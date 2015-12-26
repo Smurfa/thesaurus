@@ -5,44 +5,34 @@ namespace Thesaurus
 {
     public class Thesaurus : IThesaurus
     {
-        List<List<string>> _wordList = new List<List<string>>();
+        Dictionary<string, List<string>> _wordList = new Dictionary<string, List<string>>();
 
         public void AddSynonyms(IEnumerable<string> synonyms)
         {
-            //Check if the words being added already is in the thesaurus
-            if (_wordList.Any(x => x.Intersect(synonyms).Any()))
+            foreach (string s in synonyms)
             {
-                //Check if an entire sequence in the thesaurus exists in the sequence to be added (that is, the stored sequence is being updated with additional words)
-                //var query = _wordList.All(x => x.Contains(synonyms);
-                if (_wordList.All(x => x.Intersect(synonyms).Any()))
+                //Check if the word that is to be added already exists in thesaurus.
+                if (_wordList.ContainsKey(s))
                 {
-                    int index = _wordList.FindIndex(x => x.Intersect(synonyms).Any());
-                    _wordList.Insert(index, _wordList.ElementAt(index).Union(synonyms).ToList());
-                    _wordList.RemoveAt(index + 1);
+                    //In that case, the word is to be updated with additional synonyms.
+                    _wordList[s].InsertRange(0, _wordList[s].Union(synonyms).Except(_wordList[s]).Except(new[] { s }));
                 }
-                //Otherwise assume that the added sequence is of different meaning than the existing sequence(s)
                 else
                 {
-                    _wordList.Add(synonyms.ToList());
+                    //The word is new to the thesaurus and can safely be added with its synonyms.
+                    _wordList.Add(s, synonyms.Except(new[] { s }).ToList());
                 }
-
-            }
-            else//*/
-            {
-                //If not, then safely add the entire sequence as a new entry
-                _wordList.Add(synonyms.ToList());
             }
         }
 
         public IEnumerable<string> GetSynonyms(string word)
         {
-            //Find the lists containing the word, then exclude the word that was used to search on since it looks strange that a word is a synonym to itself
-            return _wordList.Where(x => x.Contains(word)).SelectMany(x => x).Except(new[] { word });
+            return _wordList[word];
         }
 
         public IEnumerable<string> GetWords()
         {
-            return _wordList.SelectMany(x => x);
+            return _wordList.Keys;
         }
     }
 }
