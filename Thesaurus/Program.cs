@@ -10,59 +10,43 @@ namespace Thesaurus
             IThesaurus _thesaurus = new Thesaurus();
 
             List<string> _words = new List<string> { "play", "performance", "show" };
-            AddSynonyms(_thesaurus, _words);
+            _thesaurus.AddSynonyms(_words);
             _words = new List<string> { "show", "drama", "play", "performance" };
-            AddSynonyms(_thesaurus, _words);
+            _thesaurus.AddSynonyms(_words);
+
             _words = new List<string> { "consume", "eat" };
-            AddSynonyms(_thesaurus, _words);
+            _thesaurus.AddSynonyms(_words);
             _words = new List<string> { "fun", "play", "sport" };
-            AddSynonyms(_thesaurus, _words);
+            _thesaurus.AddSynonyms(_words);
 
             Console.WriteLine("--ALL WORDS--");
-            GetWords(_thesaurus);
+            foreach (string s in _thesaurus.GetWords())
+            {
+                Console.WriteLine(s);
+            }
 
             Console.WriteLine("\n--SYNONYMS TO: play--");
-            GetSynonyms(_thesaurus, "play");
+            foreach (string s in _thesaurus.GetSynonyms("play"))
+            {
+                Console.WriteLine(s);
+            }
 
             _words = new List<string> { "performance", "work", "achievment" };
-            AddSynonyms(_thesaurus, _words);
+            _thesaurus.AddSynonyms(_words);
 
             Console.WriteLine("\n--SYNONYMS TO: performance--");
-            GetSynonyms(_thesaurus, "performance");
+            foreach (string s in _thesaurus.GetSynonyms("performance"))
+            {
+                Console.WriteLine(s);
+            }
 
             Console.WriteLine("\n--ALL WORDS--");
-            GetWords(_thesaurus);
+            foreach (string s in _thesaurus.GetWords())
+            {
+                Console.WriteLine(s);
+            }
 
             Console.ReadLine();
-        }
-
-        static void AddSynonyms(IThesaurus thesaurus, IEnumerable<string> words)
-        {
-            thesaurus.AddSynonyms(words);
-        }
-
-        static void GetSynonyms(IThesaurus thesaurus, string word)
-        {
-            try
-            {
-                foreach (string synonym in thesaurus.GetSynonyms(word))
-                {
-                    Console.WriteLine(synonym);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception occured: " + e.ToString() + "\nWord probably did not exist.");
-            }
-            
-        }
-
-        static void GetWords(IThesaurus thesaurus)
-        {
-            foreach (string word in thesaurus.GetWords())
-            {
-                Console.WriteLine(word);
-            }
         }
     }
 }
