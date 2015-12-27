@@ -15,7 +15,7 @@ namespace Thesaurus
                 if (_wordList.ContainsKey(s))
                 {
                     //In that case, the word is to be updated with additional synonyms.
-                    _wordList[s].InsertRange(0, _wordList[s].Union(synonyms).Except(_wordList[s]).Except(new[] { s }));
+                    _wordList[s] = _wordList[s].Union(synonyms.Except(new[] { s })).Distinct().ToList();
                 }
                 else
                 {
